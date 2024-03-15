@@ -78,6 +78,13 @@ public class InvestorService {
         return response;
     }
 
+    /**
+     * Updates existing Investor provided that investor exists and can be
+     * identified with their unique id.
+     * @param id unique id identifying investor.
+     * @param investor Investor instance reflecting update to be made.
+     * @return InvestorResponseDTO which reflects outcome of query.
+     */
     public InvestorResponseDTO updateInvestor(Integer id, Investor investor) {
         InvestorResponseDTO checkInvestor = getInvestor(id);
 
