@@ -22,7 +22,7 @@ public class InvestorService {
     /**
      * Retrieves all investors contained within the database provided that
      * investors are present.
-     * @return InvestorResponseDTO which reflects outcome of query.
+     * @return InvestorResponseDTO which reflects outcome of request.
      */
     public InvestorResponseDTO getInvestors() {
         List<Investor> investors = (List<Investor>) investorRepository.findAll();
@@ -36,7 +36,7 @@ public class InvestorService {
     /**
      * Retrieves investor with specified id provided that the investor exists.
      * @param id unique id identifying investor.
-     * @return InvestorResponseDTO which reflects outcome of query.
+     * @return InvestorResponseDTO which reflects outcome of request.
      */
     public InvestorResponseDTO getInvestor(Integer id) {
         Optional<Investor> investorOpt = investorRepository.findById(id);
@@ -57,7 +57,7 @@ public class InvestorService {
      * Adds new investor to database provided that the investor details
      * aren't already contained within the database.
      * @param investor Investor instance to be added to the database.
-     * @return InvestorResponseDTO which reflects outcome of query.
+     * @return InvestorResponseDTO which reflects outcome of request.
      */
     public InvestorResponseDTO addInvestor(Investor investor) {
         List<Investor> investors = investorRepository.findByFirstnameAndLastnameAndContact(
@@ -83,7 +83,7 @@ public class InvestorService {
      * identified with their unique id.
      * @param id unique id identifying investor.
      * @param investor Investor instance reflecting update to be made.
-     * @return InvestorResponseDTO which reflects outcome of query.
+     * @return InvestorResponseDTO which reflects outcome of request.
      */
     public InvestorResponseDTO updateInvestor(Integer id, Investor investor) {
         InvestorResponseDTO checkInvestor = getInvestor(id);
@@ -94,5 +94,18 @@ public class InvestorService {
         investorRepository.save(investor);
 
         return getInvestor(id);
+    }
+
+    /**
+     * Removes existing Investor with provided id from the database.
+     * @param id unique id identifying investor.
+     * @return InvestorResponseDTO which reflects outcome of request.
+     */
+    public InvestorResponseDTO removeInvestor(Integer id) {
+        // Check to make sure investor doesn't have products before removing.
+        investorRepository.deleteById(id);
+
+        return new InvestorResponseDTO("OK",
+            "Investor with provided id removed", new ArrayList<>());
     }
 }
