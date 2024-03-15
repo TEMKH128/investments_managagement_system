@@ -77,4 +77,15 @@ public class InvestorService {
 
         return response;
     }
+
+    public InvestorResponseDTO updateInvestor(Integer id, Investor investor) {
+        InvestorResponseDTO checkInvestor = getInvestor(id);
+
+        boolean investorNotExist = checkInvestor.getOutcome().equalsIgnoreCase("error");
+        if (investorNotExist) {return checkInvestor;}
+
+        investorRepository.save(investor);
+
+        return getInvestor(id);
+    }
 }
