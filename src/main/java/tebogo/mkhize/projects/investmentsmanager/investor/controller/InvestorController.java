@@ -7,7 +7,6 @@ import tebogo.mkhize.projects.investmentsmanager.investor.domain.Investor;
 import tebogo.mkhize.projects.investmentsmanager.investor.domain.InvestorService;
 import tebogo.mkhize.projects.investmentsmanager.investor.dto.InvestorResponseDTO;
 
-// capture error for reqeusts that aren't mapped.
 
 @RestController
 @RequestMapping(path = "investments")
@@ -33,6 +32,13 @@ public class InvestorController {
     @PostMapping("/investors")
     public InvestorResponseDTO addInvestor(@RequestBody Investor investor) {
         return investorService.addInvestor(investor);
+    }
+
+    @PutMapping("/investors/{id}")
+    public InvestorResponseDTO updateInvestor(@RequestBody Investor investor,
+    @PathVariable Integer id) {
+
+        return investorService.updateInvestor(id, investor);
     }
 
 }
