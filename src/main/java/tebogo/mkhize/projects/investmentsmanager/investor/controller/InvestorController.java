@@ -41,4 +41,8 @@ public class InvestorController {
         return investorService.updateInvestor(id, investor);
     }
 
+    @DeleteMapping("/investors/{id}")
+    public InvestorResponseDTO removeInvestor(@PathVariable Integer id) {
+        return investorService.removeInvestor(id);
+    }
 }
