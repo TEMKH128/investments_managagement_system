@@ -35,8 +35,8 @@ public class InvestorController {
     }
 
     @PutMapping("/investors/{id}")
-    public InvestorResponseDTO updateInvestor(@RequestBody Investor investor,
-    @PathVariable Integer id) {
+    public InvestorResponseDTO updateInvestor(
+        @RequestBody Investor investor, @PathVariable Integer id) {
 
         return investorService.updateInvestor(id, investor);
     }
