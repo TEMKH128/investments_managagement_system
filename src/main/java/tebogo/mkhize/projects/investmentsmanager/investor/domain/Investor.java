@@ -1,9 +1,8 @@
 package tebogo.mkhize.projects.investmentsmanager.investor.domain;
 
+import java.util.List;
 import jakarta.persistence.*;
 import tebogo.mkhize.projects.investmentsmanager.product.domain.Product;
-
-import java.util.List;
 
 
 @Entity
