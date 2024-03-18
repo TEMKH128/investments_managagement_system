@@ -1,9 +1,9 @@
 package tebogo.mkhize.projects.investmentsmanager.investor.domain;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import tebogo.mkhize.projects.investmentsmanager.product.domain.Product;
+
+import java.util.List;
 
 
 @Entity
@@ -14,6 +14,12 @@ public class Investor {
     private String firstname;
     private String lastname;
     private String contact;
+
+    @OneToMany(mappedBy = "investor")
+    // product can have only one Investor, But Investor can have many products.
+    // mapped by sepcifies field (variableName) in Product class that holds reference to Investor.
+    private List<Product> products;
+
 
     public Investor() {}
 
@@ -54,5 +60,13 @@ public class Investor {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
