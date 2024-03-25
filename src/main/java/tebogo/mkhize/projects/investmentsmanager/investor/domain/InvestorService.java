@@ -102,7 +102,19 @@ public class InvestorService {
      * @return InvestorResponseDTO which reflects outcome of request.
      */
     public InvestorResponseDTO removeInvestor(Integer id) {
-        // Check to make sure investor doesn't have products before removing.
+        InvestorResponseDTO checkInvestor = getInvestor(id);
+        boolean investorNotExist = checkInvestor.getOutcome().equalsIgnoreCase("error");
+        if (investorNotExist) {return checkInvestor;}
+
+        Investor investor = checkInvestor.getInvestors().get(0);
+        boolean investorHasProducts = ! investor.getProducts().isEmpty();
+
+        if (investorHasProducts) {
+            return new InvestorResponseDTO("ERROR",
+                    "Investor has existing products, Can't remove investor",
+                    checkInvestor.getInvestors());
+        }
+
         investorRepository.deleteById(id);
 
         return new InvestorResponseDTO("OK",
